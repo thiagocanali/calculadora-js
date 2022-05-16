@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="calculadora">
+        <div class="tela">
+            <h1></h1>
+        </div>
+        <hr>
+
+        <div class="botoes">
+
+        </div>
+
+    </div>
+</body>
+
+<style>
+    .calculadora {
+        border: solid 1px black;
+        width: 500px;
+        height: 500px;
+    }
+
+    .tela {
+        border: solid 1px black;
+        margin: 10px;
+        height: 50px;
+
+    }
+
+    .botoes {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+
+    }
+
+    button {
+        width: 33%;
+        height: 60px;
+    }
+</style>
+
+<script>
+
+    function teclaBotao(botao) {
+        console.log('teclabotao working', botao);
+        const tecla = document.querySelector("h1");
+        tecla.innerHTML = botao.target.innerHTML;
+        console.log(tecla.innerHTML);
+
+    }
+
+    function addBotao(valor, botoes) {
+        const variavel = document.createElement("button");
+        variavel.addEventListener("click", teclaBotao);
+        variavel.innerHTML = valor;
+        botoes.appendChild(variavel);
+    }
+
+    window.addEventListener("load", function () {
+        const botoes = document.querySelector(".botoes");
+        for (let i = 0; i < 10; i++) {
+            addBotao(i, botoes);
+        }
+
+        addBotao("+", botoes);
+        addBotao("-", botoes);
+        addBotao("x", botoes);
+        addBotao("/", botoes);
+        addBotao("=", botoes);
+        addBotao("", botoes);
+        addBotao("clear", botoes);
+        addBotao("", botoes);
+    })
+
+
+</script>
+
+</html>
