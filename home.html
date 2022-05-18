@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora</title>
 </head>
 
 <body>
@@ -26,13 +26,14 @@
     .calculadora {
         border: solid 1px black;
         width: 500px;
-        height: 500px;
+        height: 453px;
     }
 
     .tela {
         border: solid 1px black;
         margin: 10px;
         height: 50px;
+        padding-bottom: 10px;
 
     }
 
@@ -42,23 +43,80 @@
         flex-wrap: wrap;
         justify-content: space-between;
 
-
     }
 
     button {
         width: 33%;
         height: 60px;
     }
+
+    h1 {
+        text-align: end;
+    }
 </style>
 
 <script>
 
-    function teclaBotao(botao) {
-        console.log('teclabotao working', botao);
-        const tecla = document.querySelector("h1");
-        tecla.innerHTML = botao.target.innerHTML;
-        console.log(tecla.innerHTML);
+    var array = [];
+    let jaClickou = false;
 
+    function teclaBotao(botao) {
+        const tecla = document.querySelector("h1");
+        let resultado = 0;
+
+        if (botao.target.innerHTML == "=") {
+            jaClickou = true;
+            console.log(tecla.innerHTML, 'expressão ');
+            if (tecla.innerHTML.indexOf('+') != -1) {
+                let result = tecla.innerHTML.split('+');
+                console.log(Number(result[0]) + Number(result[1]));
+                resultado = Number(result[0]) + Number(result[1]);
+            }
+            if (tecla.innerHTML.indexOf('-') != -1) {
+                let result = tecla.innerHTML.split('-');
+                console.log(Number(result[0]) - Number(result[1]));
+            }
+            if (tecla.innerHTML.indexOf('x') != -1) {
+                let result = tecla.innerHTML.split('x');
+                console.log(Number(result[0]) * Number(result[1]));
+            }
+            if (tecla.innerHTML.indexOf('/') != -1) {
+                let result = tecla.innerHTML.split('/');
+                console.log(Number(result[0]) / Number(result[1]));
+            }
+            tecla.innerHTML = '';
+            tecla.innerHTML = resultado;
+
+            return;
+        }
+
+        if (jaClickou == true) {
+            tecla.innerHTML = '';
+            jaClickou = false;
+        }
+
+        if (botao.target.innerHTML == "clear") {
+            tecla.innerHTML = '';
+            return;
+        }
+
+        if (botao.target.innerHTML == "←") {
+            console.log('antes do pop ', array);
+            let arrayPop = array.pop();
+            console.log('backspace')
+            console.log('depois do pop ;', array);
+            console.log('Pop', arrayPop);
+            if (arrayPop == undefined) {
+                console.log('undefined ', tecla.innerHTML);
+                tecla.innerHTML = '';
+                return;
+            }
+            tecla.innerHTML = arrayPop;
+            return;
+        }
+
+        array.push(tecla.innerHTML);
+        tecla.innerHTML += botao.target.innerHTML;
     }
 
     function addBotao(valor, botoes) {
@@ -81,9 +139,43 @@
         addBotao("=", botoes);
         addBotao("", botoes);
         addBotao("clear", botoes);
-        addBotao("", botoes);
+        addBotao("←", botoes);
     })
 
+    /*
+    const arr = [10, -10, 50, 85, -80, 0, 102, -4, 5];
+    const arr2 = [-10, -80, -5, -888, -666];
+    const arr3 = [];
+
+    let menor = 999999;
+    let maior = -999999;
+
+    for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
+
+        if (arr[i] > maior) {
+            maior = arr[i];
+        }
+        if (arr[i] < menor) {
+            menor = arr[i];
+        }
+
+    }
+
+    console.log('o maior é : ', maior);
+    console.log('o menor é : ', menor);
+
+    for (let j = arr.length - 1; j >= 0; j--) {
+        const element = arr[j];
+        console.log(element);
+        arr3.push(element);
+    }
+    console.log(arr3);
+
+    const key = {}
+
+    arr3.reverse()
+  */
 
 </script>
 
